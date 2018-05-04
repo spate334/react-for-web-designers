@@ -257,10 +257,8 @@ jQuery(function($) {
   // prototype the change stuff here
   $('#color-options').on('change', function onColorChange() {
     var color = $(this).val();
-
     var $img = $('.product-image').find('img'),
 		oldFile = $img.attr('src');
-
     $img.attr('src', oldFile.replace(/\/\w+.jpg/, '/'+   color.toLowerCase() +'.jpg'));
   });
 });
