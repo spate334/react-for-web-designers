@@ -12,10 +12,18 @@
       });
     }
 
+    function onSizeChange(evt) {
+      props.handleSizeChange(evt.target.value);
+    }
+
     return (
       <div className="field-group">
         <label htmlFor="size-options">Size:</label>
-        <select defaultValue={props.size} name="sizeOptions" id="size-options">
+        <select
+          defaultValue={props.size}
+          name="sizeOptions"
+          id="size-options"
+          onChange={onSizeChange}>
           {sizeOptions()}
         </select>
       </div>
@@ -60,6 +68,14 @@
       };
     },
 
+    handleSizeChange: function(selectedSize) {
+      var availableColors = window.Inventory.bySize[selectedSize];
+
+      this.setState({
+        colors: availableColors
+      });
+    },
+
     render: function() {
       return (
         <div className="customizer">
@@ -67,7 +83,11 @@
             <ProductImage color={this.state.color} />
           </div>
           <div className="selectors">
-            <SizeSelector size={this.state.size} sizes={this.state.sizes} />
+            <SizeSelector
+              size={this.state.size}
+              sizes={this.state.sizes}
+              handleSizeChange={this.handleSizeChange}
+            />
             <ColorSelector color={this.state.color} colors={this.state.colors} />
           </div>
         </div>
